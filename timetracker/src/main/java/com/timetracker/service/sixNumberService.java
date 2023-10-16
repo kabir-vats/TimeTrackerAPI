@@ -1,11 +1,11 @@
-package com.helloworld.demo.service;
+package com.timetracker.service;
 
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.helloworld.demo.dto.sixNumber;
+import com.timetracker.dto.sixNumber;
 
 @Service
 public interface sixNumberService {

@@ -1,4 +1,4 @@
-package com.helloworld.demo.controller;
+package com.demo.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.helloworld.demo.service.sixNumberService;
-import com.helloworld.demo.dto.sixNumber;
+import com.timetracker.service.sixNumberService;
+import com.timetracker.dto.sixNumber;
 
 @RestController
 @RequestMapping("/api/sixNumbers")

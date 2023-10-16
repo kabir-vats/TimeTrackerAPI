@@ -1,7 +1,7 @@
-package com.helloworld.demo.service;
+package com.timetracker.service;
 
-import com.helloworld.demo.dto.sixNumber;
-import com.helloworld.demo.repository.*;
+import com.timetracker.dto.sixNumber;
+import com.timetracker.repository.*;
 
 import java.util.HashMap;
 import java.util.List;
