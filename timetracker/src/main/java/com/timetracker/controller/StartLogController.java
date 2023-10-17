@@ -15,42 +15,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.timetracker.service.sixNumberService;
-import com.timetracker.dto.sixNumber;
+import com.timetracker.service.StartLog.StartLogService;
+import com.timetracker.dto.StartLog;
 
 @RestController
-@RequestMapping("/api/sixNumbers")
-
-public class sixNumberController {
+@RequestMapping("/api/startLogs")
+public class StartLogController {
     @Autowired
-    private sixNumberService sixNumberService;
+    private StartLogService startLogService;
 
     @PostMapping()
     @CrossOrigin(origins = "http://localhost:5173")
-    public sixNumber savesixNumber(@RequestBody sixNumber sixNumber) {
-        return sixNumberService.create(sixNumber);
+    public StartLog saveStartLog(@RequestBody StartLog startLog) {
+        return startLogService.create(startLog);
     }
 
     @GetMapping()
     @CrossOrigin(origins = "http://localhost:5173")
-    public List<sixNumber> getAllsixNumbers() {
-
-        return sixNumberService.read();
+    public List<StartLog> getAllStartLogs() {
+        return startLogService.read();
     }
 
-    
+    @GetMapping("/userID/{userID}")
+    @CrossOrigin(origins = "http://localhost:5173")
+    public List<StartLog> getUserStartLogs(@PathVariable String userID) {
+        return startLogService.readByUserID(userID);
+    }
 
     @PutMapping()
     @CrossOrigin(origins = "http://localhost:5173")
-    public sixNumber updatesixNumber(@RequestBody sixNumber sixNumber) {
+    public StartLog updatestartLog(@RequestBody StartLog startLog) {
 
-        return sixNumberService.update(sixNumber);
+        return startLogService.update(startLog);
     }
 
     @DeleteMapping("/{id}")
     @CrossOrigin(origins = "http://localhost:5173")
-    public Map<String, String> deletesixNumber(@PathVariable String id) {
+    public Map<String, String> deletestartLog(@PathVariable String id) {
 
-        return sixNumberService.delete(id);
+        return startLogService.delete(id);
     }
 }

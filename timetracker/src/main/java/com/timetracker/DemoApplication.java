@@ -14,7 +14,7 @@ import java.io.*;
 
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.helloworld.demo"})
+@ComponentScan(basePackages = {"com.timetracker"})
 public class DemoApplication {
 
 	public static void main(String[] args) throws IOException {

@@ -15,42 +15,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.timetracker.service.sixNumberService;
-import com.timetracker.dto.sixNumber;
+import com.timetracker.service.User.UserService;
+import com.timetracker.dto.User;
 
 @RestController
-@RequestMapping("/api/sixNumbers")
+@RequestMapping("/api/users")
 
-public class sixNumberController {
+public class UserController {
     @Autowired
-    private sixNumberService sixNumberService;
+    private UserService userService;
 
     @PostMapping()
     @CrossOrigin(origins = "http://localhost:5173")
-    public sixNumber savesixNumber(@RequestBody sixNumber sixNumber) {
-        return sixNumberService.create(sixNumber);
+    public User saveUser(@RequestBody User user) {
+        return userService.create(user);
     }
 
     @GetMapping()
     @CrossOrigin(origins = "http://localhost:5173")
-    public List<sixNumber> getAllsixNumbers() {
+    public List<User> getAllUsers() {
 
-        return sixNumberService.read();
+        return userService.read();
     }
 
-    
+    @GetMapping("/username/{username}")
+    @CrossOrigin(origins = "http://localhost:5173")
+    public List<User> getUserbyUsername(@PathVariable String userName) {
+        return userService.readByUsername(userName);
+    }
 
     @PutMapping()
     @CrossOrigin(origins = "http://localhost:5173")
-    public sixNumber updatesixNumber(@RequestBody sixNumber sixNumber) {
+    public User updateUser(@RequestBody User user) {
 
-        return sixNumberService.update(sixNumber);
+        return userService.update(user);
     }
 
     @DeleteMapping("/{id}")
     @CrossOrigin(origins = "http://localhost:5173")
-    public Map<String, String> deletesixNumber(@PathVariable String id) {
+    public Map<String, String> deleteUser(@PathVariable String id) {
 
-        return sixNumberService.delete(id);
+        return userService.delete(id);
     }
 }

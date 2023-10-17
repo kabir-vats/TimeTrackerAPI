@@ -6,14 +6,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Log {
+public class StartLog {
     @Id
     String id;
     String userID;
     String activityID;
     Instant timeStamp;
 
-    public Log(String userID, String activityID) {
+    public StartLog(String userID, String activityID) {
         this.userID = userID;
         this.activityID = activityID;
         this.timeStamp = Instant.now();
