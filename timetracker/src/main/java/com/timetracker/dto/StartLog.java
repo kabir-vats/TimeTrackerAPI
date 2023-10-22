@@ -3,9 +3,11 @@ package com.timetracker.dto;
 import java.time.Instant;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
+@CompoundIndex(def = "{'userID' = 1, 'timeStamp' = 1}")
 public class StartLog {
     @Id
     String id;

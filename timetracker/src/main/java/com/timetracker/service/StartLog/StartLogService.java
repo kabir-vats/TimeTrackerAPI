@@ -1,5 +1,6 @@
 package com.timetracker.service.StartLog;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,8 @@ public interface StartLogService {
     List<StartLog> readByUserID(String userID);
 
     StartLog update(StartLog startLog);
+
+    StartLog updateTimeByUserID(String userID, Instant newTime);
 
     Map<String, String> delete(String id);
 }
