@@ -39,20 +39,24 @@ public class StartLogServiceImpl implements StartLogService{
         return startLogRepository.findByUserID(userID);
     }
 
+
+    @Override
     public List<StartLog> readByUserIDTimeFrame(String userID, Instant start, Instant end) {
-        List<StartLog> timeStamps = startLogRepository.findByUserIDandTimeStampBetween(userID, start, end);
+        List<StartLog> timeStamps = startLogRepository.findByUserIDAndTimeStampBetweenOrderByTimeStampAsc(userID, start, end);
         if (timeStamps.size() == 0) {
             return timeStamps;
         }
-        List<StartLog> dayBefore = startLogRepository.findByUserIDandTimeStampBetween(userID,start.minus(1, ChronoUnit.DAYS),start);
+        List<StartLog> dayBefore = startLogRepository.findByUserIDAndTimeStampBetweenOrderByTimeStampAsc(userID,start.minus(1, ChronoUnit.DAYS),start);
         if (dayBefore.size() == 0) {
             return timeStamps;
         }
         dayBefore.get(dayBefore.size()-1).setTimeStamp(start);
-        timeStamps.add(dayBefore.get(dayBefore.size()-1));
+        timeStamps.add(0,dayBefore.get(dayBefore.size()-1));
         return timeStamps;
     }
 
+
+    @Override
     public Map<String, Long> userLogsTimeFrame(String userID, Instant start, Instant end) {
         List<StartLog> timeStamps = readByUserIDTimeFrame(userID, start, end);
         Map<String,Long> userLogs = new HashMap<>();

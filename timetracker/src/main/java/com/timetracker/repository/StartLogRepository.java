@@ -12,5 +12,5 @@ import com.timetracker.dto.StartLog;
 public interface StartLogRepository extends MongoRepository<StartLog, String>{
     public List<StartLog> findByUserID(String userID);
 
-    public List<StartLog> findByUserIDandTimeStampBetween(String userID, Instant from, Instant to);
+    public List<StartLog> findByUserIDAndTimeStampBetweenOrderByTimeStampAsc(String userID, Instant from, Instant to);
 }

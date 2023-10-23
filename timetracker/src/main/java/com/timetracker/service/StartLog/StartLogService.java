@@ -17,9 +17,13 @@ public interface StartLogService {
 
     List<StartLog> readByUserID(String userID);
 
+    List<StartLog> readByUserIDTimeFrame(String userID, Instant start, Instant end);
+
+    Map<String, Long> userLogsTimeFrame(String userID, Instant start, Instant end);
+
     StartLog update(StartLog startLog);
 
-    StartLog updateTimeByUserID(String userID, Instant newTime);
+    StartLog changeTimeByID(String id, Instant newTime);
 
     Map<String, String> delete(String id);
 }

@@ -9,5 +9,5 @@ import com.timetracker.dto.User;
 
 @Repository
 public interface UserRepository extends MongoRepository<User, String>{
-    public User findByUsername(String userName);
+    public List<User> findByUsername(String userName);
 }
