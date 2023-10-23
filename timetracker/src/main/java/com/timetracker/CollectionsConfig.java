@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.index.Index;
 
 import jakarta.annotation.PostConstruct;
 
+/*Class to get indexes initialized and working for startLog*/
 @Configuration
 @DependsOn("mongoTemplate")
 public class CollectionsConfig {
