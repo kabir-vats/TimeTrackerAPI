@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
+//Activity DTO, used to store an activity with a title / userID
 @Document
 public class Activity {
     @Id

@@ -6,6 +6,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
+//Stores a log of a user starting a task
 @Document
 @CompoundIndex(def = "{'userID' = 1, 'timeStamp' = 1}")
 public class StartLog {
@@ -15,10 +18,18 @@ public class StartLog {
     String activityID;
     Instant timeStamp;
 
+    @JsonCreator
     public StartLog(String userID, String activityID) {
         this.userID = userID;
         this.activityID = activityID;
         this.timeStamp = Instant.now();
+    }
+
+    @JsonCreator
+    public StartLog(String userID, String activityID, Instant timeStamp) {
+        this.userID = userID;
+        this.activityID = activityID;
+        this.timeStamp = timeStamp;
     }
 
     public String getID() {
