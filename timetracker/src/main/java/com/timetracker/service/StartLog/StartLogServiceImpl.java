@@ -65,7 +65,14 @@ public class StartLogServiceImpl implements StartLogService{
             return userLogs;
         }
         for (int i = 0; i < sz - 1; i++) {
-            userLogs.put(timeStamps.get(i).getActivityID(),timeStamps.get(i).getTimeStamp().until(timeStamps.get(i+1).getTimeStamp(), ChronoUnit.SECONDS));
+            String activityID = timeStamps.get(i).getActivityID();
+            long numSeconds = timeStamps.get(i).getTimeStamp().until(timeStamps.get(i+1).getTimeStamp(),ChronoUnit.SECONDS);
+            if (userLogs.containsKey(activityID)){
+                userLogs.put(activityID,userLogs.get(activityID) + numSeconds);
+            }
+            else {
+                userLogs.put(activityID, numSeconds);
+            }
         }
         userLogs.put(timeStamps.get(sz-1).getActivityID(), timeStamps.get(sz-1).getTimeStamp().until(end, ChronoUnit.SECONDS));
         return userLogs;
