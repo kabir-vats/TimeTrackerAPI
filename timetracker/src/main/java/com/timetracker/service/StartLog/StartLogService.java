@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
-import com.timetracker.dto.Activity;
 import com.timetracker.dto.StartLog;
 
 @Service

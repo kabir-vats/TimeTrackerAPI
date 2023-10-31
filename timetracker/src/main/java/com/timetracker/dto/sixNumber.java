@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+//this from the demo, just keeping it for sanity but gonna delete
+//TODO: delete
 @Document
 public class sixNumber {
 

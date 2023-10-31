@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,30 +23,32 @@ import com.timetracker.dto.StartLog;
 
 @RestController
 @RequestMapping("/api/startLogs")
+@CrossOrigin(origins = "*")
+
 public class StartLogController {
     @Autowired
     private StartLogService startLogService;
 
     @PostMapping()
-    @CrossOrigin(origins = "http://localhost:5173")
+
     public StartLog saveStartLog(@RequestBody StartLog startLog) {
         return startLogService.create(startLog);
     }
 
     @GetMapping()
-    @CrossOrigin(origins = "http://localhost:5173")
+
     public List<StartLog> getAllStartLogs() {
         return startLogService.read();
     }
 
     @GetMapping("/userID/{userID}")
-    @CrossOrigin(origins = "http://localhost:5173")
+
     public List<StartLog> getUserStartLogs(@PathVariable String userID) {
         return startLogService.readByUserID(userID);
     }
 
     @GetMapping("/activityLogs/{userID}")
-    @CrossOrigin(origins = "http://localhost:5173")
+
     public List<StartLog> getUserStartLogsTimeFrame(@PathVariable String userID, 
         @RequestParam(value = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant from
         , @RequestParam(value = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant to) {
@@ -55,7 +56,7 @@ public class StartLogController {
     }
 
     @GetMapping("/userTimes/{userID}")
-    @CrossOrigin(origins = "http://localhost:5173")
+
     public Map<String, Long> getUserActivityTimes(@PathVariable String userID, 
         @RequestParam(value = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant from
         , @RequestParam(value = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant to) {
@@ -63,20 +64,20 @@ public class StartLogController {
     }
 
     @PutMapping()
-    @CrossOrigin(origins = "http://localhost:5173")
+
     public StartLog updatestartLog(@RequestBody StartLog startLog) {
 
         return startLogService.update(startLog);
     }
 
     @PatchMapping("/{id}")
-    @CrossOrigin(origins = "http://localhost:5173")
+
     public StartLog changeTime(@PathVariable String id, @RequestBody Instant newTime) {
         return startLogService.changeTimeByID(id, newTime);
     }
 
     @DeleteMapping("/{id}")
-    @CrossOrigin(origins = "http://localhost:5173")
+
     public Map<String, String> deletestartLog(@PathVariable String id) {
 
         return startLogService.delete(id);
