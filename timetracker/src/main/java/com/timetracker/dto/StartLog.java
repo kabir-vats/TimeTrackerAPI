@@ -25,12 +25,6 @@ public class StartLog {
         this.timeStamp = Instant.now();
     }
 
-    @JsonCreator
-    public StartLog(String userID, String activityID, Instant timeStamp) {
-        this.userID = userID;
-        this.activityID = activityID;
-        this.timeStamp = timeStamp;
-    }
 
     public String getID() {
         return id;

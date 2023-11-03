@@ -22,7 +22,7 @@ public class sixNumber {
         this.multipliedNumber = givenNumber * 6;
     }
 
-    public String getID() {
+    public String getId() {
         return id;
     }
 

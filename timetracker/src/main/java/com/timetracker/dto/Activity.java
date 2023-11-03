@@ -19,7 +19,7 @@ public class Activity {
         this.title = title;
     }
 
-    public String getActivityID() {
+    public String getId() {
         return id;
     }
 
