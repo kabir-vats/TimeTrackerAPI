@@ -3,6 +3,8 @@ package com.timetracker.dto;
 import java.time.ZoneId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.lang.NonNull;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 //Stores a user's timezone, id, and username. Password / auth not implemented yet.
@@ -10,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 public class User {
     @Id
     private String id;
+    @NonNull
     private String username;
+    @NonNull
     ZoneId userTimeZone;
 
     @JsonCreator
@@ -27,7 +31,7 @@ public class User {
         return username;
     }
 
-    public ZoneId getTimeZone() {
+    public ZoneId getUserTimeZone() {
         return userTimeZone;
     }
 

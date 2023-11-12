@@ -11,6 +11,7 @@ import java.io.*;
 public class DemoApplication {
 
 	public static void main(String[] args) throws IOException {
+		System.setProperty("java.naming.provider.url", "dns://8.8.8.8");
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
