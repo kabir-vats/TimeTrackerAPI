@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.timetracker.service.StartLog.StartLogService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
+
+import com.timetracker.dto.Activity;
 import com.timetracker.dto.StartLog;
 
 @RestController
@@ -30,13 +37,18 @@ public class StartLogController {
     private StartLogService startLogService;
 
     @PostMapping()
-
-    public StartLog saveStartLog(@RequestBody StartLog startLog) {
-        return startLogService.create(startLog);
+    public Object saveStartLog(@RequestBody @Valid StartLog startLog, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+        if (bindingResult.hasErrors()) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return ControllerErrorsHelper.processErrors(bindingResult);
+        }
+        else {
+            response.setStatus(HttpServletResponse.SC_OK);
+            return startLogService.create(startLog);
+        }
     }
 
     @GetMapping()
-
     public List<StartLog> getAllStartLogs() {
         return startLogService.read();
     }
@@ -49,7 +61,7 @@ public class StartLogController {
 
     @GetMapping("/activityLogs/{userID}")
 
-    public List<StartLog> getUserStartLogsTimeFrame(@PathVariable String userID, 
+    public List<StartLog> getUserStartLogsTimeFrame(@PathVariable @Valid String userID, 
         @RequestParam(value = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant from
         , @RequestParam(value = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant to) {
         return startLogService.readByUserIDTimeFrame(userID, from, to);
@@ -57,7 +69,7 @@ public class StartLogController {
 
     @GetMapping("/userTimes/{userID}")
 
-    public Map<String, Long> getUserActivityTimes(@PathVariable String userID, 
+    public Map<String, Long> getUserActivityTimes(@PathVariable @Valid String userID, 
         @RequestParam(value = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant from
         , @RequestParam(value = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Instant to) {
         return startLogService.userLogsTimeFrame(userID, from, to);
@@ -65,9 +77,15 @@ public class StartLogController {
 
     @PutMapping()
 
-    public StartLog updatestartLog(@RequestBody StartLog startLog) {
-
-        return startLogService.update(startLog);
+    public Object updatestartLog(@RequestBody StartLog startLog, BindingResult bindingResult, HttpServletRequest request, HttpServletResponse response) {
+        if (bindingResult.hasErrors()) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return ControllerErrorsHelper.processErrors(bindingResult);
+        }
+        else {
+            response.setStatus(HttpServletResponse.SC_OK);
+            return startLogService.update(startLog);
+        }
     }
 
     @PatchMapping("/{id}")

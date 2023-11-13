@@ -6,15 +6,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.lang.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.timetracker.service.User.ValidUser;
+
+import jakarta.validation.constraints.NotEmpty;
 
 //Stores a user's timezone, id, and username. Password / auth not implemented yet.
 @Document
+@ValidUser
 public class User {
     @Id
     private String id;
-    @NonNull
     private String username;
-    @NonNull
     ZoneId userTimeZone;
 
     @JsonCreator

@@ -10,14 +10,21 @@ import org.springframework.stereotype.Service;
 import com.timetracker.dto.User;
 import com.timetracker.repository.UserRepository;
 
+import jakarta.validation.Validator;
+
 @Service
 public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private Validator validator;
+
     @Override
     public User create(User user) {
+        validator.validate(user);
+
         return userRepository.insert(user);
     }
 
@@ -33,6 +40,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User update(User user) {
+        validator.validate(user);
+
         return userRepository.save(user);
     }
 

@@ -3,6 +3,7 @@ package com.timetracker.service.Activity;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,14 +11,22 @@ import org.springframework.stereotype.Service;
 import com.timetracker.dto.Activity;
 import com.timetracker.repository.ActivityRepository;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
+
 @Service
 public class ActivityServiceImpl implements ActivityService {
 
     @Autowired
     private ActivityRepository activityRepository;
 
+    @Autowired
+    private Validator validator;
+
     @Override
     public Activity create(Activity activity) {
+        validator.validate(activity);
+
         return activityRepository.insert(activity);
     }
 
@@ -33,6 +42,8 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public Activity update(Activity activity) {
+        validator.validate(activity);
+
         return activityRepository.save(activity);
     }
 

@@ -15,14 +15,21 @@ import org.springframework.stereotype.Service;
 import com.timetracker.dto.StartLog;
 import com.timetracker.repository.StartLogRepository;
 
+import jakarta.validation.Validator;
+
 @Service
 public class StartLogServiceImpl implements StartLogService{
 
     @Autowired
     private StartLogRepository startLogRepository;
 
+    @Autowired
+    private Validator validator;
+
     @Override
     public StartLog create(StartLog startLog) {
+        validator.validate(startLog);
+
         return startLogRepository.insert(startLog);
     }
 
@@ -77,6 +84,7 @@ public class StartLogServiceImpl implements StartLogService{
 
     @Override
     public StartLog update(StartLog startLog) {
+        validator.validate(startLog);
         return startLogRepository.save(startLog);
     }
 

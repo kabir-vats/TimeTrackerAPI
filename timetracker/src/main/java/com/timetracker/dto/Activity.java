@@ -4,9 +4,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.timetracker.service.Activity.ValidActivity;
 
 //Activity DTO, used to store an activity with a title / userID
 @Document
+@ValidActivity
 public class Activity {
     @Id
     String id;
