@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyString;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -72,6 +74,23 @@ public class ActivityServiceTests {
             .thenReturn(noErrors);
 
         assertEquals(activity, activityService.create(activity));
+    }
+
+    @Test
+    public void testDelete() {
+        String id = "654321";
+        Mockito.when(activityRepository.count())
+            .thenReturn((long)4)
+            .thenReturn((long)3)
+            .thenReturn((long)3);
+        Map<String, String> successfulDelete = new HashMap<>();
+        successfulDelete.put("message", "Record deleted");
+        assertEquals(activityService.delete(id), successfulDelete);
+        
+        Map<String, String> unsuccessfulDelete = new HashMap<>();
+        unsuccessfulDelete.put("message", "Something went wrong!");
+        assertEquals(activityService.delete(id), unsuccessfulDelete);
+    
     }
 
 }
