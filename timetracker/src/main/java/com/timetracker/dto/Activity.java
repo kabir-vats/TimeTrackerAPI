@@ -15,11 +15,14 @@ public class Activity {
     String userID;
     String title;
 
-    @JsonCreator
+    public Activity() {
+    }
+
     public Activity(String userID, String title) {
         this.userID = userID;
         this.title = title;
     }
+
 
     public String getId() {
         return id;
@@ -35,6 +38,14 @@ public class Activity {
 
     public void setTitle(String newTitle) {
         this.title = newTitle;
+    }
+
+    public void setUserID(String newUserID) {
+        this.userID = newUserID;
+    }
+
+    public void setId(String newId) {
+        this.id = newId;
     }
 
 }
